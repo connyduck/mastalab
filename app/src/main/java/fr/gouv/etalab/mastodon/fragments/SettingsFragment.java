@@ -198,6 +198,21 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+
+        boolean reverse_reading = sharedpreferences.getBoolean(Helper.SET_REVERSE_READING, true);
+        final CheckBox set_reverse_reading = rootView.findViewById(R.id.set_reverse_reading);
+        set_reverse_reading.setChecked(reverse_reading);
+
+        set_multiaccount_actions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putBoolean(Helper.SET_REVERSE_READING, set_reverse_reading.isChecked());
+                editor.apply();
+            }
+        });
+
+
         boolean display_local = sharedpreferences.getBoolean(Helper.SET_DISPLAY_LOCAL, true);
         final CheckBox set_display_local = rootView.findViewById(R.id.set_display_local);
         set_display_local.setChecked(display_local);

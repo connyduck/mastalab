@@ -216,6 +216,7 @@ public class Helper {
     public static final String SET_SHOW_REPLIES = "set_show_replies";
     public static final String INSTANCE_VERSION = "instance_version";
     public static final String SET_LIVE_NOTIFICATIONS = "set_show_replies";
+    public static final String SET_REVERSE_READING = "set_reverse_reading";
 
     public static final int ATTACHMENT_ALWAYS = 1;
     public static final int ATTACHMENT_WIFI = 2;

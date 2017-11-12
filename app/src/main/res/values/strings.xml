@@ -69,6 +69,7 @@
     <string name="action_open_in_web">Open in browser</string>
     <string name="translate">Translate</string>
     <string name="please_wait">Please, wait few seconds before making this action.</string>
+    <string name="reverse_reading">Reverse reading direction in Home timeline</string>
     <!--- Menu -->
     <string name="home_menu">Home</string>
     <string name="local_menu">Local timeline</string>

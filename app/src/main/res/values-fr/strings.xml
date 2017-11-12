@@ -439,4 +439,5 @@
     <string name="insert_emoji">Insérer un émoji</string>
     <string name="no_emoji">L\'application n\'a pas encore collecté d\'emojis personnalisés</string>
     <string name="live_notif">Notifications en direct</string>
+    <string name="reverse_reading">Inverser le sens de lecture sur la page d\'accueil.</string>
 </resources>

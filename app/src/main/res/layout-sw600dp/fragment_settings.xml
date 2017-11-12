@@ -119,6 +119,13 @@
             android:text="@string/live_notif"
             android:layout_height="wrap_content" />
 
+        <!-- Reverse reading direction SETTINGS -->
+        <CheckBox
+            android:id="@+id/set_reverse_reading"
+            android:layout_width="wrap_content"
+            android:text="@string/reverse_reading"
+            android:layout_height="wrap_content" />
+
         <!-- TABS Layout -->
         <LinearLayout
             android:id="@+id/translation_layout_container"
