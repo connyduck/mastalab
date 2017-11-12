@@ -18,6 +18,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 import fr.gouv.etalab.mastodon.client.API;
 import fr.gouv.etalab.mastodon.client.APIResponse;
@@ -34,7 +35,7 @@ public class RetrieveFeedsAsyncTask extends AsyncTask<Void, Void, Void> {
 
     private Type action;
     private APIResponse apiResponse;
-    private String max_id;
+    private String max_id, since_id;
     private OnRetrieveFeedsInterface listener;
     private String targetedID;
     private String tag;
@@ -59,6 +60,13 @@ public class RetrieveFeedsAsyncTask extends AsyncTask<Void, Void, Void> {
         this.action = action;
         this.max_id = max_id;
         this.listener = onRetrieveFeedsInterface;
+    }
+    public RetrieveFeedsAsyncTask(Context context, Type action, String since_id, String max_id, OnRetrieveFeedsInterface onRetrieveFeedsInterface){
+        this.contextReference = new WeakReference<>(context);
+        this.action = action;
+        this.max_id = max_id;
+        this.listener = onRetrieveFeedsInterface;
+        this.since_id = since_id;
     }
 
     public RetrieveFeedsAsyncTask(Context context, Type action, String targetedID, String max_id, boolean showMediaOnly, boolean showPinned, OnRetrieveFeedsInterface onRetrieveFeedsInterface){
@@ -85,7 +93,25 @@ public class RetrieveFeedsAsyncTask extends AsyncTask<Void, Void, Void> {
         API api = new API(this.contextReference.get());
         switch (action){
             case HOME:
-                apiResponse = api.getHomeTimeline(max_id);
+                if( since_id != null) {
+                    apiResponse = api.getHomeTimeline(since_id);
+                    List<fr.gouv.etalab.mastodon.client.Entities.Status> finalStatus = apiResponse.getStatuses();
+                    //since_id is decreased to be sure to include this value in results
+                    APIResponse apiResponse1 = api.getStatusbyId(since_id);
+                    if(apiResponse1.getStatuses().size() > 0)
+                        finalStatus.add(0, apiResponse1.getStatuses().get(0));
+                    APIResponse apiResponsetmp = api.getHomeTimelineSinceId(since_id);
+                    String since_id = apiResponsetmp.getSince_id();
+                    if( apiResponsetmp.getStatuses() != null) {
+                        apiResponse.setFocusedElement(apiResponsetmp.getStatuses().size()); //<-- this is the current cursor position
+                        finalStatus.addAll(0, apiResponsetmp.getStatuses());
+                    }
+                    apiResponse.setSince_id(since_id);
+                    apiResponse.setStatuses(finalStatus);
+                }else {
+                    apiResponse = api.getHomeTimeline(max_id);
+                }
+
                 break;
             case LOCAL:
                 apiResponse = api.getPublicTimeline(true, max_id);

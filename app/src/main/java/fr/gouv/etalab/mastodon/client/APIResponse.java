@@ -33,6 +33,7 @@ public class APIResponse {
     private fr.gouv.etalab.mastodon.client.Entities.Error error = null;
     private String since_id, max_id;
     private Instance instance;
+    private int focusedElement = 0;
 
     public List<Account> getAccounts() {
         return accounts;
@@ -104,5 +105,13 @@ public class APIResponse {
 
     public void setRelationships(List<Relationship> relationships) {
         this.relationships = relationships;
+    }
+
+    public int getFocusedElement() {
+        return focusedElement;
+    }
+
+    public void setFocusedElement(int focusedElement) {
+        this.focusedElement = focusedElement;
     }
 }
