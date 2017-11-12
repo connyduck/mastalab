@@ -199,11 +199,11 @@ public class SettingsFragment extends Fragment {
         });
 
 
-        boolean reverse_reading = sharedpreferences.getBoolean(Helper.SET_REVERSE_READING, true);
+        boolean reverse_reading = sharedpreferences.getBoolean(Helper.SET_REVERSE_READING, false);
         final CheckBox set_reverse_reading = rootView.findViewById(R.id.set_reverse_reading);
         set_reverse_reading.setChecked(reverse_reading);
 
-        set_multiaccount_actions.setOnClickListener(new View.OnClickListener() {
+        set_reverse_reading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences.Editor editor = sharedpreferences.edit();
